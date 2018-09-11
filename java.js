@@ -8,6 +8,7 @@ HTMLElement.prototype.clear = function () {
 };
 
 const buildCharacterSheet = function (data) {
+    console.log(data);
     const article = document.createElement('article');
     article.setAttribute('class', 'characterSheet');
 
@@ -103,7 +104,7 @@ main.appendChild(spinner);
 const getSingle = function (type, id) {
     fetch(`http://www.dnd5eapi.co/api/${type}/${id}`, {
         'method': 'GET',
-        'mode': 'no-cors',
+        //'mode': 'no-cors',
         'headers': {
             'Access-Control-Allow-Origin': '*'
         }
@@ -116,7 +117,7 @@ const getSingle = function (type, id) {
                 sheet = buildCharacterSheet(data);
                 break;
             case 'spells':
-                sheet = buildspellSheet(data);
+                sheet = buildSpellSheet(data);
                 break;
             default:
                 sheet = buildCharacterSheet(data);
@@ -128,8 +129,8 @@ const getSingle = function (type, id) {
     });
 };
 
-const getList = function (type, page) {
-    fetch(`http://www.dnd5eapi.co/api/${type}/${page}`, {
+const getList = function (type) {
+    fetch(`http://www.dnd5eapi.co/api/${type}`, {
         'method': 'GET',
         //'mode': 'no-cors',
         'headers': {
@@ -149,25 +150,14 @@ const getList = function (type, page) {
 document.addEventListener('DOMContentLoaded', () => {
 
     let type = url.searchParams.get('type') || 'classes';
-    let page = url.searchParams.get('page') || 1;
+    let id = url.searchParams.get('id');
 
-    getList(type, page);
+    console.log(id);
+    if (id == null) {
+        getList(type);
+    }
+    else {
+        getSingle(type, id);
+    }
 
-    const links = document.querySelectorAll('header nav ul li a');
-
-    links.forEach(link => {
-        link.addEventListener('click', event => {
-            event.preventDefault();
-            const urlString = new URL(link.href);
-            const page = urlString.searchParams.get('page');
-
-            history.pushState({}, '', `?page=${page}`);
-
-            const h1 = document.createElement('h1');
-            const pageTitle = document.createTextNode(page);
-            h1.appendChild(pageTitle);
-
-            document.querySelectorAll('main').appendChild(h1);
-        });
-    });
 });
