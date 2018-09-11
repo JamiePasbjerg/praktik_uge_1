@@ -19,7 +19,7 @@ const buildCharacterSheet = function (data) {
     return article;
 }
 
-const buildspellSheet = function (data) {
+const buildSpellSheet = function (data) {
     const article = document.createElement('article');
     article.setAttribute('class', 'spellSheet');
 
@@ -37,10 +37,10 @@ var classes = url.searchParams.get("classes");
 var spells = url.searchParams.get("spells");
 console.log(classes);
 if (classes == undefined) {
-    classes = 6;
+    classes = 1;
 }
 if (spells == undefined) {
-    spells = 32;
+    spells = 1;
 }
 
 const buildList = function (data) {
@@ -53,7 +53,7 @@ const buildList = function (data) {
         previous.appendChild(previousText);
         article.appendChild(previous);
 
-        const urlString = data.previous.replace('http://dnd5eapi.co/api/', '');
+        const urlString = data.previous.replace('http://www.dnd5eapi.co/api/', '');
 
         const type = urlString.split('/')[0];
         const page = urlString.split('/')[1].replace('?page=', '');
@@ -66,7 +66,7 @@ const buildList = function (data) {
         next.appendChild(nextText);
         article.appendChild(next);
 
-        const urlString = data.next.replace('http://dnd5eapi.co/api/', '');
+        const urlString = data.next.replace('http://www.dnd5eapi.co/api/', '');
 
         const type = urlString.split('/')[0];
         const page = urlString.split('/')[1].replace('?page=', '');
@@ -84,7 +84,7 @@ const buildList = function (data) {
         a.appendChild(text);
         ul.appendChild(li);
 
-        const urlString = data.results[i].url.replace('http://dnd5eapi.co/api/', '');
+        const urlString = data.results[i].url.replace('http://www.dnd5eapi.co/api/', '');
 
         const type = urlString.split('/')[0];
         const id = urlString.split('/')[1];
@@ -101,7 +101,13 @@ spinner.setAttribute('class', 'fas fa-spinner fa-spin');
 main.appendChild(spinner);
 
 const getSingle = function (type, id) {
-    fetch(`http://dnd5eapi.co/api/${type}/${id}`)
+    fetch(`http://www.dnd5eapi.co/api/${type}/${id}`, {
+        'method': 'GET',
+        'mode': 'no-cors',
+        'headers': {
+            'Access-Control-Allow-Origin': '*'
+        }
+    })
     .then(response => response.json())
     .then(data => {
         let sheet;
@@ -123,9 +129,16 @@ const getSingle = function (type, id) {
 };
 
 const getList = function (type, page) {
-    fetch(`http://dnd5eapi.co/api/${type}/?page=${page}`)
+    fetch(`http://www.dnd5eapi.co/api/${type}/${page}`, {
+        'method': 'GET',
+        //'mode': 'no-cors',
+        'headers': {
+            'Access-Control-Allow-Origin': '*'
+        }
+    })
     .then(response => response.json())
     .then(data => {
+        console.log(data);
         document
             .querySelector('main')
             .clear()
