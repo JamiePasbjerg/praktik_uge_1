@@ -7,15 +7,27 @@ HTMLElement.prototype.clear = function () {
     return this;
 };
 
+const newTag = function(tag, text = null, attributes = []) {
+    const element = document.createElement(tag);
+    if (text) {
+        const textNode = document.createTextNode(text);
+        element.appendChild(textNode);
+    }
+    if (attributes.length) {
+        attributes.forEach(attribute => {
+            element.setAttribute(attribute.name, attribute.value);
+        });
+    }
+    return element;
+}
+
 const buildCharacterSheet = function (data) {
     console.log(data);
     const article = document.createElement('article');
     article.setAttribute('class', 'characterSheet');
 
-    const heading = document.createElement('h1');
-    const headingText = document.createTextNode(data.name);
-    heading.appendChild(headingText);
-    article.appendChild(heading);
+    article.appendChild(newTag('h1', data.name));
+    article.appendChild(newTag('p', 'Hit Die: '+data.hit_die));
 
     return article;
 }
