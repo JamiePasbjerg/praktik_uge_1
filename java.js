@@ -26,7 +26,7 @@ const buildCharacterSheet = function (data) {
     const article = document.createElement('article');
     article.setAttribute('class', 'characterSheet');
 
-    article.appendChild(newTag('h1', data.name));
+    article.appendChild(newTag('h1', 'Class: '+data.name));
     article.appendChild(newTag('p', 'Hit Die: '+data.hit_die));
 
     return article;
