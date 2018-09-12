@@ -33,13 +33,21 @@ const buildCharacterSheet = function (data) {
 }
 
 const buildSpellSheet = function (data) {
+    console.log(data);
     const article = document.createElement('article');
     article.setAttribute('class', 'spellSheet');
 
-    const heading = document.createElement('h1');
-    const headingText = document.createTextNode(data.name);
-    heading.appendChild(headingText);
-    article.appendChild(heading);
+    article.appendChild(newTag('h1', data.name));
+    article.appendChild(newTag('p', 'Spell level: '+data.level));
+    article.appendChild(newTag('p', 'Casting time: '+data.casting_time));
+    article.appendChild(newTag('p', 'Ritual casting: '+data.ritual));
+    article.appendChild(newTag('p', 'Range: '+data.range));
+    article.appendChild(newTag('p', 'Duration: '+data.duration));
+    article.appendChild(newTag('p', 'Concentration: '+data.concentration));
+    article.appendChild(newTag('p', 'Components: '+data.components));
+    article.appendChild(newTag('p', 'Material components: '+data.material));
+    article.appendChild(newTag('p', data.desc));
+    article.appendChild(newTag('p', data.higher_level));
 
     return article;
 }

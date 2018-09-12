@@ -8,8 +8,10 @@
     <title>D&amp;D 5e</title>
 </head>
 <body>
-    <header></header>
-        <nav>
+    <header>
+        <img src="" alt="">
+    </header>
+        <nav class="menu">
             <ul>
                 <li>
                     <a href="index.html">Main Page</a>
@@ -19,23 +21,28 @@
                 </li>
             </ul>
         </nav>
+        <aside class="ad"></aside>
     <main>
         <h1>Something something</h1>
 		<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam harum delectus dolor id laboriosam ullam eligendi quasi, magni, vero necessitatibus fugiat officia iste maiores veniam ipsam commodi numquam enim obcaecati!</p>
     </main>
-    <footer></footer>
+    <footer>
+        <label for="newsletter"></label><input type="text" name="newsletter" id="">
+        <input type="submit" value="Send">
+    </footer>
+        <section class="social"></section>
     <script src="java.js" defer></script>
 	<script>
 		document.addEventListener('DOMContentLoaded', () => {
 			const stylesheet = document.createElement('link');
-			stylesheet.href = 'css/style.css';
+			stylesheet.href = 'style.css';
 			stylesheet.rel = 'stylesheet';
 			stylesheet.type = 'text/css';
 			document.getElementsByTagName('head')[0].appendChild(stylesheet);
 		});
 	</script>
 	<noscript>
-		<link rel="stylesheet" href="css/style.css">
+		<link rel="stylesheet" href="style.css">
 	</noscript>
 </body>
 </html>
