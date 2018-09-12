@@ -26,6 +26,23 @@ const buildCharacterSheet = function (data) {
     const article = document.createElement('article');
     article.setAttribute('class', 'characterSheet');
 
+    article.appendChild(newTag('h1', 'Race: '+data.name));
+    article.appendChild(newTag('p', 'Movement speed: '+data.speed));
+    article.appendChild(newTag('p', 'Size: '+data.size));
+    article.appendChild(newTag('p', data.size_description));
+    article.appendChild(newTag('p', 'Ability bonuses: '+data.ability_bonuses));
+    article.appendChild(newTag('p', data.language_desc));
+    article.appendChild(newTag('p', data.age));
+    article.appendChild(newTag('p', data.alignment));
+
+    return article;
+}
+
+const buildClassSheet = function (data) {
+    console.log(data);
+    const article = document.createElement('article');
+    article.setAttribute('class', 'classSheet');
+
     article.appendChild(newTag('h1', 'Class: '+data.name));
     article.appendChild(newTag('p', 'Hit Die: '+data.hit_die));
 
@@ -54,9 +71,13 @@ const buildSpellSheet = function (data) {
 
 var urlInfo = window.location.href;
 var url = new URL(urlInfo);
+var races = url.searchParams.get("races");
 var classes = url.searchParams.get("classes");
 var spells = url.searchParams.get("spells");
-console.log(classes);
+console.log(races);
+if (races == undefined) {
+    races = 1;
+}
 if (classes == undefined) {
     classes = 1;
 }
@@ -133,8 +154,11 @@ const getSingle = function (type, id) {
     .then(data => {
         let sheet;
         switch (type) {
-            case 'classes':
+            case 'races':
                 sheet = buildCharacterSheet(data);
+                break;
+            case 'classes':
+                sheet = buildClassSheet(data);
                 break;
             case 'spells':
                 sheet = buildSpellSheet(data);
@@ -169,7 +193,7 @@ const getList = function (type) {
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    let type = url.searchParams.get('type') || 'classes';
+    let type = url.searchParams.get('type') || 'races';
     let id = url.searchParams.get('id');
 
     console.log(id);
