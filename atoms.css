@@ -1,8 +1,16 @@
 .hero_image {
-    height: 45em;
-    width: auto;
+    width: 100%;
 }
 aside .ad_img {
-    width: 20em;
+    width: 15em;
     height: auto;
+}
+.twitter_icon {
+    color: #00aced;
+}
+.facebook_icon {
+    color: #3b5998;
+}
+.tumblr_icon {
+    color: #34465D;
 }

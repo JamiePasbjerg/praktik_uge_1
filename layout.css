@@ -1,9 +1,38 @@
 body {
     display: grid;
-    grid-template-columns: 10% auto 15%;
+    grid-template-columns: 15% auto 15%;
     grid-template-rows: 50% 20% 30%;
     grid-template-areas:
     'ad header menu'
     'ad main menu'
     'ad footer social';
+}
+
+#categories {
+    display: grid;
+    grid-template-columns: 30% auto 30%;
+    grid-template-rows: 20% 50% 30%;
+    grid-template-areas:
+    'menu header social'
+    'main main main'
+    'footer footer footer';
+}
+
+header {
+    grid-area: header;
+}
+nav {
+    grid-area: menu;
+}
+aside {
+    grid-area: ad;
+}
+main {
+    grid-area: main;
+}
+footer {
+    grid-area: footer;
+}
+.social {
+    grid-area: social;
 }
