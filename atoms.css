@@ -1,6 +1,9 @@
 .hero_image {
     width: 100%;
 }
+a {
+    color: black;
+}
 aside .ad_img {
     width: 15em;
     height: auto;
